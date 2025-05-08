@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h1>Song Details 🎵</h1>
+<h2>{{song.title}}</h2>
+<p>Artist: {{song.artist}} </p>
+<p>Release on: {{song.date}}</p>
+<p>link: <a href="{{song.link}}"> {{song.link}}</a></p>
+
+<!-- Only admin can edit or delete songs : 
+i found this way when I searched: https://stackoverflow.com/questions/69428225/allow-page-access-only-for-admin-user-django -->
+{% if user.is_superuser %}
+<a href="{% url 'song_update' song.pk%}">Edit</a>
+<a href="{% url 'song_delete' song.pk%}">Delete</a>
+{%endif%}
+{% endblock%}

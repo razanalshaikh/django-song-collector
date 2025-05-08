@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h1>Songs List🎶:</h1>
+<ul style="list-style-type: none; ">
+    {% for song in songs %}
+        <li>
+            <a href="{%url 'song_detail' song.pk%}">
+                <h3>{{song.title}}🎵 </h3>
+            </a>
+        </li>
+    {% empty%}
+    <h2>There are no songs🎵 </h2>
+    {% endfor %}
+</ul>
+<!-- Only admin can add songs to program: 
+i found this way when I searched: https://stackoverflow.com/questions/69428225/allow-page-access-only-for-admin-user-django -->
+{% if user.is_superuser %}
+<a href="{% url 'song_create' %}">Add Song + </a>
+{%endif%}
+
+{% endblock%}

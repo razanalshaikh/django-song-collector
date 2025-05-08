@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h1>
+    All Artist:
+</h1>
+
+<ul>
+    {%for artist in artists%}
+    <li>
+        <a href="{% url 'artist_detail' artist.pk %}">{{artist.name}}</a>
+    </li>
+    {% empty%}
+    <h2>There are no artist</h2>
+    {% endfor %}
+</ul>
+<!-- Only admin can add artists to program: 
+i found this way when I searched: https://stackoverflow.com/questions/69428225/allow-page-access-only-for-admin-user-django -->
+{% if user.is_superuser %}
+<a href="{% url 'artist_create' %}">Add Artist + </a>
+{%endif%}
+{% endblock%}

@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<h1>{{playlist.name}}🎶</h1>
+<a href="{% url 'playlist_update' playlist.pk%}"> Edit</a>
+<a href="{% url 'playlist_delete' playlist.pk%}"> Delete</a>
+{% if playlist.songs.count %}
+    <h4>Songs:</h4>
+    {% for song in playlist.songs.all%}
+        <p> &nbsp; <b>{{song.title}}</b> link to play
+            <a href="{{song.link}}">{{song.link}}</a></p>
+            <form method="post" action="{% url 'dessoc_song' playlist.id song.id%}">
+                {%csrf_token%}
+                <button type="submit">Remove</button>
+            </form>
+    {%endfor%}
+{% else%}
+    <h5> &nbsp; No songs added to playlist ! </h5>
+{% endif%}
+
+{% if songs_playlist_does_not_have.count %}
+    <h4>Available Songs:</h4>
+    {% for song in songs_playlist_does_not_have %}
+            <p>&nbsp;{{song.title}}</p>
+            <form method="post"action="{% url 'assoc_song' playlist.id song.id%}">
+                {%csrf_token%}
+                <button type="submit" > Add Song</button>  
+            </form>
+    {% endfor %}
+    {% else %}
+            <h5>No Available Songs</h5>
+    {% endif %}
+
+{% endblock%}
+
+

@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h2>Are You Sure You Want To Delete {{object.name}} ?</h2>
+<form method="post">
+    {%csrf_token%}
+    <button type="submit"> Confirm</button>
+</form>
+
+<a href="{% url 'artist_detail' object.pk%}"> Cancel</a>
+{% endblock%}

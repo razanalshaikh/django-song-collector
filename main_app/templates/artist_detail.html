@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h1>Artist:</h1>
+<h2>{{ artist.name }}</h2>
+<!-- Only admin can add artist to program: 
+i found this way when I searched: https://stackoverflow.com/questions/69428225/allow-page-access-only-for-admin-user-django -->
+{% if user.is_superuser %}
+<a href="{% url 'artist_update' artist.pk%}">Edit</a>
+<a href="{% url 'artist_delete' artist.pk%}">Delete</a>
+{%endif%}
+<h2>Album:</h2>
+<!-- Only admin can add albums to artist: 
+i found this way when I searched: https://stackoverflow.com/questions/69428225/allow-page-access-only-for-admin-user-django -->
+{% if user.is_superuser %}
+<form action="{% url 'add_album_to_artist' artist.id%}" method="post">
+    {% csrf_token %}
+    {{album_form.as_p}}
+    <input type="submit" value="Add Album">
+</form>
+{%endif%}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Album</th>
+            <th>Language</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for album in artist.album_set.all %}
+            <td>{{album.album_title}}</td>
+            <td>{{album.get_language_display}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    const selectElement = document.querySelector('#id_language')
+    M.FormSelect.init(selectElement)
+</script>
+{% endblock%}

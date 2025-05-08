@@ -1,0 +1,27 @@
+body{
+    background-color: rgb(241, 241, 242);
+}
+
+nav{
+    background-color: rgb(145, 99, 163);
+    display: flex;
+    flex-direction: row;
+}
+nav a {
+    float: left;
+    padding-right: 2%;
+    margin-left: 2%;
+}
+nav a:hover{
+    color: #1e3298;
+}
+
+li a {
+    color: rgb(58, 58, 109);
+}
+.btn{
+    background-color: rgb(145, 99, 163);
+}
+.btn:hover{
+    background-color: rgb(58, 58, 109);
+}
