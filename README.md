@@ -11,6 +11,6 @@ a simpe website where I learend how to develop a song collector website using dj
 - **psycopg2-binary** – PostgreSQL database adapter for Python.
 - **django-cors-headers** – Manages Cross-Origin Resource Sharing (CORS).
 
-### Tools & ServicesC
+### Tools & Services
 - **PostgreSQL** – Relational database used for storing application data.
 - **Postman** - Used to test urls.
